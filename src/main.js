@@ -129,10 +129,6 @@ const sendBtn = document.getElementById("sendBtn");
 const chatInput = document.getElementById("chatInput");
 const chatBody = document.getElementById("chatBody");
 
-/* ================= GEMINI API ================= */
-
-const API_KEY = "PASTE_YOUR_GEMINI_API_KEY";
-
 /* ================= OPEN CHAT ================= */
 
 if (aiButton) {
@@ -184,81 +180,25 @@ async function getAIResponse(message) {
   try {
 
     const response = await fetch(
-
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
-
+      "/.netlify/functions/chat",
       {
 
         method: "POST",
 
         headers: {
-
           "Content-Type": "application/json"
-
         },
 
         body: JSON.stringify({
-
-          contents: [
-
-            {
-
-              parts: [
-
-                {
-
-                  text: `
-
-You are RohanAI, an AI assistant for Rohan S Bhat's portfolio.
-
-Answer ONLY about:
-- skills
-- projects
-- education
-- internships
-- certifications
-- resume
-- contact information
-
-Rohan Skills:
-Java, Spring Boot, MySQL, HTML, CSS, JavaScript, Python, Bootstrap, Git.
-
-Projects:
-- Student-Sphere
-- TuneHub
-- File-Vista
-- PDF Chat AI
-
-Education:
-M.Tech at Reva University.
-B.E in Computer Science from Canara Engineering College.
-
-Experience:
-Software Development Intern at KodNest.
-Web Development Intern at CodSoft.
-
-User Question:
-${message}
-
-                  `
-
-                }
-
-              ]
-
-            }
-
-          ]
-
+          message: message
         })
 
       }
-
     );
 
     const data = await response.json();
 
-    return data.candidates[0].content.parts[0].text;
+    return data.reply;
 
   } catch (error) {
 
