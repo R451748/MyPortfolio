@@ -25,9 +25,9 @@ exports.handler = async function(event) {
 
     // Read Resume PDF
     const pdfPath = path.join(
-      process.cwd(),
-      "RohanbhatResume.pdf"
-    );
+  __dirname,
+  "../../RohanbhatResume.pdf"
+);
 
     const pdfBuffer = fs.readFileSync(pdfPath);
 
