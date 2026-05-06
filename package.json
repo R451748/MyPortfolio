@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/R451748/MyPortfolio#readme",
   "dependencies": {
-    "pdf-parse": "^2.4.5"
+    "pdf-parse": "^2.4.5",
+    "pdfjs-dist": "^5.7.284"
   }
 }
