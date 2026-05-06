@@ -1,3 +1,7 @@
+const fs = require("fs");
+const path = require("path");
+const pdfParse = require("pdf-parse");
+
 exports.handler = async function(event) {
 
   if (event.httpMethod !== "POST") {
@@ -16,8 +20,23 @@ exports.handler = async function(event) {
 
   try {
 
+    // Get user message
     const { message } = JSON.parse(event.body);
 
+    // Read Resume PDF
+    const pdfPath = path.join(
+      process.cwd(),
+      "RohanbhatResume.pdf"
+    );
+
+    const pdfBuffer = fs.readFileSync(pdfPath);
+
+    // Extract text from PDF
+    const pdfData = await pdfParse(pdfBuffer);
+
+    const resumeText = pdfData.text;
+
+    // Send to Groq AI
     const response = await fetch(
 
       "https://api.groq.com/openai/v1/chat/completions",
@@ -47,55 +66,21 @@ exports.handler = async function(event) {
 
               content: `
 
-You are RohanAI, assistant for Rohan S Bhat's portfolio website.
+You are an AI Resume Assistant.
 
-ONLY answer using the information below.
+Answer ONLY using the resume provided below.
 
-If user asks anything unrelated, reply:
-"I can answer only about Rohan S Bhat's portfolio, resume, projects, education, skills, and experience."
+Do NOT generate your own information.
+Do NOT assume anything.
 
-================ RESUME INFO ================
+If answer is not found in resume, reply:
+"I couldn't find that information in the resume."
 
-Name:
-Rohan S Bhat
+============== RESUME ==============
 
-Skills:
-Java,
-Spring Boot,
-MySQL,
-HTML,
-CSS,
-JavaScript,
-Python,
-Bootstrap,
-Git,
-Manual Testing
+${resumeText}
 
-Education:
-- M.Tech in Computer Science at Reva University
-- B.E in Computer Science from Canara Engineering College
-
-Experience:
-- Software Development Intern at KodNest Technologies
-- Web Development Intern at CodSoft
-
-Projects:
-1. Student-Sphere
-2. TuneHub
-3. File-Vista
-4. PDF Chat AI
-
-Certifications:
-Java,
-SQL,
-Web Development
-
-Contact:
-Email: rohanbhat524@gmail.com
-LinkedIn: https://www.linkedin.com/in/rohan-s-bhat/
-GitHub: https://github.com/R451748
-
-================================================
+====================================
 
               `
 
@@ -119,21 +104,7 @@ GitHub: https://github.com/R451748
 
     const data = await response.json();
 
-    if (data.error) {
-
-      return {
-
-        statusCode: 500,
-
-        body: JSON.stringify({
-
-          reply: data.error.message
-
-        })
-
-      };
-
-    }
+    console.log(data);
 
     return {
 
@@ -149,6 +120,8 @@ GitHub: https://github.com/R451748
     };
 
   } catch (error) {
+
+    console.error(error);
 
     return {
 

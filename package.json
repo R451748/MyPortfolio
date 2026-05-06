@@ -1,0 +1,24 @@
+{
+  "name": "myportfolio",
+  "version": "1.0.0",
+  "description": "Live demo https://rohanbhatportfolio.netlify.app/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/R451748/MyPortfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/R451748/MyPortfolio/issues"
+  },
+  "homepage": "https://github.com/R451748/MyPortfolio#readme",
+  "dependencies": {
+    "pdf-parse": "^2.4.5"
+  }
+}
