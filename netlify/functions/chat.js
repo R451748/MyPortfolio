@@ -1,6 +1,3 @@
-const fetch = (...args) =>
-  import('node-fetch').then(({default: fetch}) => fetch(...args));
-
 exports.handler = async function(event) {
 
   try {
@@ -10,6 +7,7 @@ exports.handler = async function(event) {
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
+
         method: "POST",
 
         headers: {
@@ -29,14 +27,14 @@ exports.handler = async function(event) {
                   text: `
 You are RohanAI assistant.
 
-Answer only about Rohan's:
-- skills
+Answer only about:
+- Rohan's skills
 - projects
 - education
 - internships
 - resume
 - contact
-                  
+
 User Question:
 ${message}
                   `
@@ -55,12 +53,31 @@ ${message}
 
     const data = await response.json();
 
+    console.log(data);
+
+    if (!data.candidates) {
+
+      return {
+
+        statusCode: 500,
+
+        body: JSON.stringify({
+          reply: "Gemini API error."
+        })
+
+      };
+
+    }
+
     return {
 
       statusCode: 200,
 
       body: JSON.stringify({
-        reply: data.candidates[0].content.parts[0].text
+
+        reply:
+          data.candidates[0].content.parts[0].text
+
       })
 
     };
@@ -72,7 +89,9 @@ ${message}
       statusCode: 500,
 
       body: JSON.stringify({
-        reply: "AI is currently unavailable."
+
+        reply: error.message
+
       })
 
     };
