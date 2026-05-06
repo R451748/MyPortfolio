@@ -24,10 +24,11 @@ exports.handler = async function(event) {
     const { message } = JSON.parse(event.body);
 
     // Read Resume PDF
-   const pdfPath = path.join(
-  __dirname,
-  "../../resume.pdf"
-);
+    const pdfPath = path.join(
+      process.cwd(),
+      "RohanbhatResume.pdf"
+    );
+
     const pdfBuffer = fs.readFileSync(pdfPath);
 
     // Extract text from PDF
