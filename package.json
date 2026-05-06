@@ -20,6 +20,7 @@
   "homepage": "https://github.com/R451748/MyPortfolio#readme",
   "dependencies": {
     "pdf-parse": "^2.4.5",
+    "pdf2json": "^4.0.3",
     "pdfjs-dist": "^5.7.284"
   }
 }

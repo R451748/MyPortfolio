@@ -1,16 +1,19 @@
 const fs = require("fs");
 const path = require("path");
+const PDFParser = require("pdf2json");
 
-async function extractPdfText(buffer) {
-  const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
-  const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
-  let text = "";
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const page = await pdf.getPage(i);
-    const content = await page.getTextContent();
-    text += content.items.map(item => item.str).join(" ") + "\n";
-  }
-  return text;
+async function extractPdfText(pdfPath) {
+  return new Promise((resolve, reject) => {
+    const parser = new PDFParser();
+    parser.on("pdfParser_dataReady", (data) => {
+      const text = data.Pages.map(page =>
+        page.Texts.map(t => decodeURIComponent(t.R[0].T)).join(" ")
+      ).join("\n");
+      resolve(text);
+    });
+    parser.on("pdfParser_dataError", reject);
+    parser.loadPDF(pdfPath);
+  });
 }
 
 exports.handler = async function(event) {
@@ -25,8 +28,7 @@ exports.handler = async function(event) {
     const { message } = JSON.parse(event.body);
 
     const pdfPath = path.join(__dirname, "RohanbhatResume.pdf");
-    const pdfBuffer = fs.readFileSync(pdfPath);
-    const resumeText = await extractPdfText(pdfBuffer);
+    const resumeText = await extractPdfText(pdfPath);
 
     const response = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
