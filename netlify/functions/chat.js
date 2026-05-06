@@ -4,67 +4,67 @@ const pdfParse = require("pdf-parse");
 
 exports.handler = async function(event) {
 
-  if (event.httpMethod !== "POST") {
+  if (event.httpMethod !== "POST") {
 
-    return {
+    return {
 
-      statusCode: 405,
+      statusCode: 405,
 
-      body: JSON.stringify({
-        reply: "Method Not Allowed"
-      })
+      body: JSON.stringify({
+        reply: "Method Not Allowed"
+      })
 
-    };
+    };
 
-  }
+  }
 
-  try {
+  try {
 
-    // Get user message
-    const { message } = JSON.parse(event.body);
+    // Get user message
+    const { message } = JSON.parse(event.body);
 
-    // Read Resume PDF
-    const pdfPath = path.join(
-  __dirname,
-  "../../RohanbhatResume.pdf"
+    // Read Resume PDF
+    const pdfPath = path.join(
+    __dirname,
+    "../../RohanbhatResume.pdf"
 );
 
-    const pdfBuffer = fs.readFileSync(pdfPath);
+    const pdfBuffer = fs.readFileSync(pdfPath);
 
-    // Extract text from PDF
-    const pdfData = await pdfParse(pdfBuffer);
+    // Extract text from PDF
+    const pdfData = await pdfParse(pdfBuffer);
 
-    const resumeText = pdfData.text;
+    const resumeText = pdfData.text;
 
-    // Send to Groq AI
-    const response = await fetch(
+    // Send to Groq AI
+    const response = await fetch(
 
-      "https://api.groq.com/openai/v1/chat/completions",
+      "https://api.groq.com/openai/v1/chat/completions",
 
-      {
+      {
 
-        method: "POST",
+        method: "POST",
 
-        headers: {
+        headers: {
 
-          "Content-Type": "application/json",
+          "Content-Type": "application/json",
 
-          "Authorization":
-            `Bearer ${process.env.GROQ_API_KEY}`
+          "Authorization":
+            `Bearer ${process.env.GROQ_API_KEY}`
 
-        },
+        },
 
-        body: JSON.stringify({
+        body: JSON.stringify({
 
-          model: "llama-3.3-70b-versatile",
+          model: "llama-3.3-70b-versatile",
 
-          messages: [
+          messages: [
 
-            {
+            {
 
-              role: "system",
+              role: "system",
 
-              content: `
+              content: `
 
 You are an AI Resume Assistant.
 
@@ -82,59 +82,59 @@ ${resumeText}
 
 ====================================
 
-              `
+              `
 
-            },
+            },
 
-            {
+            {
 
-              role: "user",
+              role: "user",
 
-              content: message
+              content: message
 
-            }
+            }
 
-          ]
+          ]
 
-        })
+        })
 
-      }
+      }
 
-    );
+    );
 
-    const data = await response.json();
+    const data = await response.json();
 
-    console.log(data);
+    console.log(data);
 
-    return {
+    return {
 
-      statusCode: 200,
+      statusCode: 200,
 
-      body: JSON.stringify({
+      body: JSON.stringify({
 
-        reply:
-          data.choices[0].message.content
+        reply:
+          data.choices[0].message.content
 
-      })
+      })
 
-    };
+    };
 
-  } catch (error) {
+  } catch (error) {
 
-    console.error(error);
+    console.error(error);
 
-    return {
+    return {
 
-      statusCode: 500,
+      statusCode: 500,
 
-      body: JSON.stringify({
+      body: JSON.stringify({
 
-        reply: error.message
+        reply: error.message
 
-      })
+      })
 
-    };
+    };
 
-  }
+  }
 
 };
