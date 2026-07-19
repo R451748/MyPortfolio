@@ -498,7 +498,45 @@ font-size:18px;
 .skill-card i{
 font-size:34px;
 }
+.fa-vial-circle-check{
+    color:#22c55e;
+}
 
+.fa-bug{
+    color:#ef4444;
+}
+
+.fa-shield-halved{
+    color:#2563eb;
+}
+
+.fa-chart-column{
+    color:#7c3aed;
+}
+
+.fa-robot{
+    color:#0ea5e9;
+}
+
+.fa-brain{
+    color:#ec4899;
+}
+
+.fa-magnifying-glass{
+    color:#f59e0b;
+}
+
+.fa-layer-group{
+    color:#06b6d4;
+}
+
+.fa-microchip{
+    color:#10b981;
+}
+
+.fa-comments{
+    color:#ff4b4b;
+}
 }
 /* Projects Section */
 .projects {
