@@ -326,7 +326,7 @@ h2 {
 }
 
 /* Skills Section */
-.skills {
+/* .skills {
   padding: 5rem 0;
   background: var(--gray-50);
 }
@@ -365,8 +365,141 @@ h2 {
   background: var(--primary);
   border-radius: 9999px;
   transition: width 1s ease-in-out;
+} */
+/* ================= Skills ================= */
+
+.skills{
+    padding:100px 0;
+    background:#f8fafc;
 }
 
+.skills h2{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:50px;
+    color:#0f172a;
+}
+
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+.skill-card{
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    background:#fff;
+    padding:22px 28px;
+
+    border-radius:18px;
+    border:1px solid #e5e7eb;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+
+    transition:.35s ease;
+}
+
+.skill-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.skill-card i{
+    font-size:38px;
+    width:55px;
+    text-align:center;
+}
+
+/* Icon Colors */
+
+.fa-java{
+    color:#f89820;
+}
+
+.fa-leaf{
+    color:#6db33f;
+}
+
+.fa-python{
+    color:#3776ab;
+}
+
+.fa-react{
+    color:#61dafb;
+}
+
+.fa-js{
+    color:#f7df1e;
+}
+
+.fa-html5{
+    color:#e34f26;
+}
+
+.fa-css3-alt{
+    color:#1572b6;
+}
+
+.fa-bootstrap{
+    color:#7952b3;
+}
+
+.fa-database{
+    color:#00758f;
+}
+
+.fa-server{
+    color:#0ea5e9;
+}
+
+.fa-docker{
+    color:#2496ed;
+}
+
+.fa-git-alt{
+    color:#f05032;
+}
+
+.fa-github{
+    color:#181717;
+}
+
+.fa-code{
+    color:#2563eb;
+}
+
+.fa-chart-line{
+    color:#ff4b4b;
+}
+
+.skill-card span{
+    font-size:22px;
+    font-weight:600;
+    color:#1e293b;
+}
+
+@media(max-width:768px){
+
+.skills-grid{
+grid-template-columns:1fr;
+}
+
+.skill-card{
+padding:20px;
+}
+
+.skill-card span{
+font-size:18px;
+}
+
+.skill-card i{
+font-size:34px;
+}
+
+}
 /* Projects Section */
 .projects {
   padding: 5rem 0;
