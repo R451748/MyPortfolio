@@ -109,25 +109,8 @@ h2 {
   transition: 0.3s;
 }
 
-/* Profile Picture */
-/* .profile-picture {
-  width: 200px;
-  height: 200px;
-  margin: 0 auto 2rem;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 4px solid white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.profile-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
 /* ================= HERO PROFILE ================= */
 
-/* 
 .profile-wrapper{
     position:relative;
     width:380px;
@@ -138,7 +121,125 @@ h2 {
     align-items:center;
 }
 
+/* Floating background */
 
+.blob{
+    position:absolute;
+    width:340px;
+    height:340px;
+    background:linear-gradient(135deg,#4f46e5,#06b6d4);
+    border-radius:45% 55% 60% 40%;
+    filter:blur(35px);
+    opacity:.5;
+    animation:morph 8s infinite ease-in-out;
+}
+
+.blob2{
+    position:absolute;
+    width:280px;
+    height:280px;
+    background:#8b5cf6;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:.25;
+    animation:float 6s infinite ease-in-out;
+}
+
+.profile-card{
+
+    position:relative;
+
+    width:310px;
+    height:360px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.35);
+
+    border-radius:35px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.15);
+
+    transition:.5s;
+
+}
+
+.profile-card:hover{
+
+    transform:
+    translateY(-12px)
+    rotateX(5deg)
+    rotateY(-5deg);
+
+}
+
+.profile-img{
+
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+}
+
+.status-badge{
+
+    position:absolute;
+
+    left:50%;
+    bottom:18px;
+
+    transform:translateX(-50%);
+
+    background:white;
+
+    padding:10px 22px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-20px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+@keyframes morph{
+
+0%{
+border-radius:45% 55% 60% 40%;
+}
+
+50%{
+border-radius:60% 40% 45% 55%;
+}
+
+100%{
+border-radius:45% 55% 60% 40%;
+}
+
+}
 /* Hero Section */
 .hero {
   min-height: 100vh;
