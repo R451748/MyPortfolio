@@ -160,7 +160,7 @@ h2 {
 }
 
 /* Gradient Border */
-
+/* 
 .profile-card::before{
 
     content:"";
@@ -223,6 +223,14 @@ h2 {
         transform:scale(.95);
         opacity:.7;
     }
+
+} */
+.profile-card:hover{
+
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.15);
 
 }
 /* Hero Section */
