@@ -139,7 +139,7 @@ h2 {
 
 /* Profile Card */
 
-.profile-card{
+/* .profile-card{
     position: relative;
     width: 280px;
     height: 330px;
@@ -157,6 +157,26 @@ h2 {
         0 10px 30px rgba(79,70,229,.15);
 
     transition: all .4s ease;
+} */
+.profile-card{
+
+    position:relative;
+
+    width:280px;
+    height:330px;
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+    transition:all .35s ease;
+
 }
 
 /* Gradient Border */
