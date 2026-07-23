@@ -1142,6 +1142,45 @@ font-size:34px;
     justify-content: center;
   }
 }
+
+.cert-card{
+    text-decoration:none;
+    color:inherit;
+    background:var(--card-bg);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:30px;
+    text-align:center;
+    transition:.35s;
+    backdrop-filter:blur(12px);
+    display:block;
+}
+
+.cert-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+}
+
+.cert-icon{
+    font-size:42px;
+    margin-bottom:18px;
+}
+
+.cert-card h3{
+    margin:12px 0 8px;
+    font-size:1.05rem;
+}
+
+.cert-card p{
+    color:#9ca3af;
+    margin-bottom:18px;
+}
+
+.view-cert{
+    display:inline-block;
+    color:#4f46e5;
+    font-weight:600;
+}
 /* ================= FLOATING AI CHATBOT ================= */
 
 .floating-ai-chat {
